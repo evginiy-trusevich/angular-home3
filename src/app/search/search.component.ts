@@ -29,7 +29,7 @@ export class SearchComponent implements OnInit {
   public ngOnInit(): void {
     this._githubService.result$$ = (this.formModel.get('searchName') as FormControl).valueChanges
       .do(() => this.loading$$.next(true))
-      .debounceTime(300)
+      .debounceTime(700)
       .switchMap((value: string) => this._githubService.getGitHubData(value))
       .do(() => this.loading$$.next(false));
   }
