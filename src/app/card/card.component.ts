@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {GithubService} from '../common/services/github.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-card',
@@ -8,18 +9,16 @@ import {GithubService} from '../common/services/github.service';
 })
 export class CardComponent implements OnInit {
 
-  public results$: any;
-  public message: boolean;
+  public results$: Observable<any>;
 
   constructor(
     private _githubService: GithubService
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
-    this._githubService.data
-      .subscribe((result: any) => {
-      this.results$ = result.items;
-      })
+    this.results$ = this._githubService.result$$;
   }
 
 }
