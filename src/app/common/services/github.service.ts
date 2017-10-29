@@ -1,12 +1,14 @@
 import {Inject, Injectable} from '@angular/core';
-// import {Observable} from 'rxjs/Observable';
-import {HttpClient} from '@angular/common/http';
-
-
-
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class GithubService {
+
+  public results$: any;
 
   constructor(
     @Inject('baseUrl') private _baseUrl: string,
@@ -15,8 +17,12 @@ export class GithubService {
 
   }
 
-  public getGitHubData(): any {
-    return this._http.get(`${this._baseUrl}`)
+  public getGitHubData(value: string): Observable<any> {
+    return this._http.get(`${this._baseUrl}search/repositories?q=${value}`)
+      .catch((error: HttpErrorResponse): Observable<any> => {
+        console.log(error);
+        return Observable.of([]);
+      });
   }
 
 }

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {GithubService} from '../common/services/github.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-search',
@@ -7,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  public formModel: FormGroup = new FormGroup({
+    searchName: new FormControl('', [Validators.required, Validators.minLength(0)])
+  });
 
-  ngOnInit() {
+  public constructor(private _githubService: GithubService) {
+  }
+
+  public ngOnInit(): void {
+    (this.formModel.get('searchName') as FormControl).valueChanges
+      .debounceTime(1000)
+      .switchMap((value: string) => {
+        return this._githubService.getGitHubData(value);
+      })
+      .subscribe((data: any) => {
+        this._githubService.results$ = data;
+        console.log('Form changes', data);
+      })
   }
 
 }
