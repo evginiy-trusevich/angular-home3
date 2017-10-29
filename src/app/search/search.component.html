@@ -3,9 +3,12 @@
     <input type="text" matInput formControlName="searchName" placeholder="Search repo">
   </mat-input-container>
 </form>
+
+
+
 <div *ngIf="loading$$ | async">
   <div class="loadBlock">
-    <img src="/assets/pacman.gif" alt="">
+    <img src="../../assets/pacman.gif" alt="">
   </div>
 </div>
 <app-card></app-card>
