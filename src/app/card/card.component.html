@@ -1,0 +1,18 @@
+<div class="repo">
+
+  <mat-card *ngFor="let result of results$" class="repo-card">
+
+    <div class="author">
+      <img [src]="result.owner.avatar_url" alt="">
+    </div>
+    <mat-card-title>
+      {{result.name}}
+    </mat-card-title>
+
+    <mat-card-content>
+      {{result.description}}
+    </mat-card-content>
+
+  </mat-card>
+</div>
+

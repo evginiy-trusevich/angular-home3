@@ -1,8 +1,11 @@
-<form  [formGroup]="formModel">
+<form [formGroup]="formModel">
   <mat-input-container>
-    <input type="text" matInput ngModel formControlName="searchName" placeholder="Search repo">
+    <input type="text" matInput formControlName="searchName" placeholder="Search repo">
   </mat-input-container>
 </form>
-
-{{formModel.value | json}}
-{{formModel.valid}}
+<div *ngIf="loading">
+  <div class="loadBlock">
+    <img src="./../../assets/pacman.gif" alt="">
+  </div>
+</div>
+<app-card></app-card>

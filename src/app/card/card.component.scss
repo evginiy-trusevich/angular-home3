@@ -1,0 +1,15 @@
+.repo {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.repo-card {
+  margin: 10px;
+  width: 45%;
+}
+
+img {
+  float: right;
+  height: 100px;
+  width: 100px;
+}
