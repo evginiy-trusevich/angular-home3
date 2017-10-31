@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit {
       .do(() => this.loading$$.next(true))
       .debounceTime(700)
       .switchMap((value: string) => this._githubService.getGitHubData(value))
-      .do(() => this.loading$$.next(false));
+      // .do(() => this.loading$$.next(false));
   }
 
 }
